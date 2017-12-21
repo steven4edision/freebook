@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Document document = Jsoup.connect("http://qxs.la/xuanhuan/").get();
+                    Document document = Jsoup.connect("http://qxs.la/qihuan/").get();
 
 //                    Elements elementsByClass = document.getElementsByClass("main list");
                     Elements elements_list = document.getElementsByClass("list_content ");
