@@ -1,7 +1,11 @@
 package vide.steve.com.videoproject;
 
+import android.app.Activity;
 import android.app.Application;
 import android.graphics.Typeface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 类名:
@@ -14,6 +18,7 @@ public class MyApllication extends Application{
 
     public Typeface typeFace;
     public static  MyApllication myApllication;
+    public static List<Activity> unDestroyActivityList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -30,6 +35,16 @@ public class MyApllication extends Application{
                     "fonts/fzkatong.otf");
         }
     }
+
+    public void quit() {
+        for (Activity activity : unDestroyActivityList) {
+            if (null != activity) {
+                activity.finish();
+            }
+        }
+        unDestroyActivityList.clear();
+    }
+
 
 
 }

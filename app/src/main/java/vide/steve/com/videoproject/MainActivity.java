@@ -112,4 +112,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+//    var ss=["67.229.159.202","67.229.159.202","67.229.159.202"];
+//var index = s % ss.length;
+    public void getDownLoadLink(String prefix,String id,String name){
+        String url = "http://" + "67.229.159.202" + "/full/" + prefix + "/" + id + ".txt";
+    }
 }
