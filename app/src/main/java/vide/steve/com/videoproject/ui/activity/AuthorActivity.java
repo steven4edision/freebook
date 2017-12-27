@@ -8,4 +8,5 @@ package vide.steve.com.videoproject.ui.activity;
  */
 
 public class AuthorActivity {
+
 }
