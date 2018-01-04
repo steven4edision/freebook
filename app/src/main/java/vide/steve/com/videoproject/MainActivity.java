@@ -1,4 +1,5 @@
 package vide.steve.com.videoproject;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +7,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,21 +23,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vide.steve.com.videoproject.api.bean.ArtWorkItemBean;
+import vide.steve.com.videoproject.ui.activity.PlayWebVideoActivity;
 import vide.steve.com.videoproject.ui.adapter.ArtworkListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     public RecyclerView recycleview;
-
     public List<ArtWorkItemBean> lists = new ArrayList<>();
     public MyHandler myHandler;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mAdView = (AdView) findViewById(R.id.adView);
         recycleview = findViewById(R.id.recycleview);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         myHandler = new MyHandler();
 
@@ -52,13 +64,10 @@ public class MainActivity extends AppCompatActivity {
                         String text = cc2.text();
                         bean.setTitle(text);
                         bean.setUrl(href1);
-//                        map.put("title",text);
-//                        map.put("url",href1);
 
                         Elements cc3 = element.getElementsByClass("cc3");
                         String text1 = cc3.text();
                         bean.setContent(text1);
-//                        map.put("content",text1);
 
                         Elements cc4 = element.getElementsByClass("cc4");
                         Elements cc4_select = cc4.select("[href]");
@@ -66,23 +75,14 @@ public class MainActivity extends AppCompatActivity {
                         String author = cc4.text();
                         bean.setAuthor(author);
                         bean.setAuthor_url(cc4_href);
-//                        map.put("author",author);
-//                        map.put("author_url",cc4_href);
 
                         Elements cc5 = element.getElementsByClass("cc5");
                         String text3 = cc5.text();
                         bean.setTime(text3);
-//                        map.put("time",text3);
 
                         lists.add(bean);
                     }
-
                     myHandler.sendEmptyMessage(1);
-
-                    Log.v("666666666666666666=",elements_list.toString());
-                    Log.v("666666666666666666=",lists.toString());
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -107,7 +107,15 @@ public class MainActivity extends AppCompatActivity {
                     recycleview.setLayoutManager(manager);
                     ArtworkListAdapter adapter = new ArtworkListAdapter(R.layout.activity_artwork_list_item,lists);
                     recycleview.setAdapter(adapter);
-
+                    adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                            Intent intent = new Intent(MainActivity.this, PlayWebVideoActivity.class);
+//                            intent.putExtra("url","http://m.kankanwu.com/Comedy/xiuxiudetiequan/player-1-0.html");
+//                            startActivity(intent);
+                        }
+                    });
+//                    http://m.kankanwu.com/Comedy/xiuxiudetiequan/player-1-0.html
                     break;
             }
         }

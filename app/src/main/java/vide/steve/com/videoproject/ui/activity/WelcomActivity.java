@@ -1,5 +1,10 @@
 package vide.steve.com.videoproject.ui.activity;
 
+import android.content.Intent;
+import android.os.CountDownTimer;
+
+import vide.steve.com.videoproject.MainActivity;
+import vide.steve.com.videoproject.R;
 import vide.steve.com.videoproject.ui.BaseActivity;
 
 /**
@@ -12,9 +17,25 @@ import vide.steve.com.videoproject.ui.BaseActivity;
 public class WelcomActivity extends BaseActivity{
 
 
+    private CountDownTimer timer = new CountDownTimer(3000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
+        public void onFinish() {
+            Intent intent = new Intent(WelcomActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+
     @Override
     public void setContentLayout() {
 
+        setContentView(R.layout.activity_welcom);
     }
 
     @Override
@@ -29,6 +50,8 @@ public class WelcomActivity extends BaseActivity{
 
     @Override
     public void dealLogicAfterInitView() {
+
+        timer.start();
 
     }
 }

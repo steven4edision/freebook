@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.graphics.Typeface;
 
+import com.tencent.smtt.sdk.QbSdk;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class MyApllication extends Application{
     public void onCreate() {
         myApllication = this;
         super.onCreate();
+        QbSdk.initX5Environment(this,null);
     }
 
 
