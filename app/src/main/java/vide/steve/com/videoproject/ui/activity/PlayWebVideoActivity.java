@@ -11,6 +11,7 @@ import android.util.Log;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
+import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -66,11 +67,62 @@ public class PlayWebVideoActivity extends AppCompatActivity {
             ix5.setScrollBarFadingEnabled(false);
         }
 
+//        activity_play_webview.evaluateJavascript("uaredirectformobile()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//
+//                Log.e("uaredirectformobile===",s);
+//            }
+//        });
+//        activity_play_webview.evaluateJavascript("jquery-1.7.2.min()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//                Log.e("jquery-1.7.2.min===",s);
+//            }
+//        });
+//        activity_play_webview.evaluateJavascript("jquery-lazyload()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//                Log.e("lazyload===",s);
+//            }
+//        });
+//        activity_play_webview.evaluateJavascript("jquery.base()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//                Log.e("jquery.base===",s);
+//            }
+//        });
+//        activity_play_webview.evaluateJavascript("home()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//                Log.e("home===",s);
+//            }
+//        });
+//        activity_play_webview.evaluateJavascript("20X4()", new ValueCallback<String>() {
+//            @Override
+//            public void onReceiveValue(String s) {
+//                Log.e("20X4===",s);
+//            }
+//        });
+        activity_play_webview.evaluateJavascript("view_base()", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String s) {
+                Log.e("api_base===",s);
+            }
+        });
+
 
         WebViewClient webViewClient = new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                activity_play_webview.evaluateJavascript("view_base()", new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String s) {
+                        Log.e("api_base===",s);
+                    }
+                });
+
                 return false;
             }
 
